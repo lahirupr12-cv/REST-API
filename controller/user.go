@@ -1,7 +1,13 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/lahirupr12-cv/gin_restapi/config"
+	"github.com/lahirupr12-cv/gin_restapi/models"
+)
 
 func UserController(c *gin.Context) {
-	c.String(200, "Hello World")
+	users := []models.User{}
+	config.DB.Find(&users)
+	c.JSON(200, &users)
 }

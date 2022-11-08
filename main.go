@@ -11,8 +11,11 @@ func main() {
 	//configure router
 	router := gin.New()
 	routes.UserRoutes(router)
-	router.Run(":8081")
 
 	//database connection
 	config.Connect()
+
+	//config port
+	router.Run(":8081")
+
 }
