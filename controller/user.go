@@ -13,9 +13,11 @@ func GetUsers(c *gin.Context) {
 }
 
 func CreateUsers(c *gin.Context) {
-	users := []models.User{}
-	config.DB.Find(&users)
-	c.JSON(200, &users)
+	var user models.User
+	c.BindJSON(&user)
+	config.DB.Create(&user)
+	c.JSON(201, &user)
+
 }
 
 func DeleteUser(c *gin.Context) {
