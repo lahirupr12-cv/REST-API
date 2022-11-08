@@ -27,7 +27,9 @@ func DeleteUser(c *gin.Context) {
 }
 
 func UpdateUser(c *gin.Context) {
-	users := []models.User{}
-	config.DB.Find(&users)
-	c.JSON(200, &users)
+	var user models.User
+	config.DB.Where("id = ?", c.Param("id")).First(&user)
+	c.BindJSON(&user)
+	config.DB.Save(&user)
+	c.JSON(200, &user)
 }
